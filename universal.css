@@ -1,0 +1,257 @@
+/* Цвета (основано на логотипе) */
+:root{
+  --blue:#14345a;           /* глубокий синий */
+  --acid:#9cff00;           /* кислотно-зелёный акцент */
+  --red:#b92b2b;            /* насыщенный красный */
+  --bg:#ffffff;
+  --muted:#6b6b6b;
+  --card:#fbfcfd;
+  --shadow: rgba(20,20,20,0.08);
+  --radius:14px;
+  --gap:14px;
+  --max-w:1100px;
+}
+
+/* Базовые стили */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, Poppins, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  background: linear-gradient(180deg,#ffffff 0%, #f7f9fb 100%);
+  color:var(--blue);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.35;
+  padding-bottom:60px;
+}
+
+.wrap{
+  max-width:420px; /* мобильный фокус */
+  margin:0 auto;
+  padding:16px;
+}
+
+/* Header */
+header{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:10px 0 16px;
+}
+.logo{
+  border: 0.1px solid #14345a;
+  width: 92px;
+  height: 92px;
+  border-radius: 12px;
+  background: linear-gradient(135deg,var(--blue),#1b6bd6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 6px 18px var(--shadow);
+  flex :0 0 92px;
+}
+.logo img {
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
+.brand{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.brand .title{
+  font-weight:700;
+  color:var(--blue);
+  font-size:17px;
+  letter-spacing:0.2px;
+}
+.brand .subtitle{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* Quick actions */
+.actions{
+  display:flex;
+  gap:10px;
+  margin:12px 0;
+}
+.btn{
+  flex:1;
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+  padding:12px;
+  border-radius:12px;
+  font-weight:600;
+  font-size:14px;
+  text-decoration:none;
+  color:var(--blue);
+  background:var(--card);
+  box-shadow:0 6px 18px var(--shadow);
+}
+.btn-cta{
+  background:var(--blue);
+  color: white;
+}
+.btn-ws{
+  background:linear-gradient(90deg,#25D366,#1EBEA5);
+  color:#fff;
+}
+
+/* Banner / Hero */
+.hero{
+  margin:10px 0 18px;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(180deg, rgba(20,52,90,0.95), rgba(185,43,43,0.85));
+  color:#fff;
+  padding:18px;
+  box-shadow:0 12px 30px rgba(20,20,20,0.08);
+}
+.hero h1{
+  font-size:18px;
+  margin:0 0 6px;
+}
+.hero p{margin:0;font-size:13px;opacity:0.95}
+
+  /* Categories */
+  .cats {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 8px 24px 18px;
+  border-left: 2px solid var(--blue);
+  border-right: 2px solid var(--blue);
+}
+
+.cat {
+  border: 1px solid #14345a;
+  min-width: 130px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 6px 18px var(--shadow);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+.emoji {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.name {
+  font-size: 13px;
+  color: var(--blue);
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.cats a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Products grid (one column mobile) */
+.products{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:12px;
+}
+.card{
+  border: 1px solid #14345a;
+  background:#fff;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 8px 20px var(--shadow);
+  display:flex;
+  gap:12px;
+  padding:12px;
+  align-items:center;
+}
+.card img{
+  width:88px;
+  height:68px;
+  object-fit:cover;
+  border-radius:10px;
+  flex:0 0 88px;
+}
+.card .info{
+  flex:1;
+}
+.card h3{
+  margin:0 0 6px;
+  font-size:15px;
+  color:var(--blue);
+}
+.card p{
+  margin:0;font-size:13px;color:var(--muted);
+}
+.price{
+  font-weight:700;color:var(--red);font-size:15px;margin-top:8px;
+}
+
+/* Footer / contacts */
+.contacts {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: var(--blue);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  width: 160px;             /* одинаковая ширина для обеих кнопок */
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.contact-btn.whatsapp {
+  background: linear-gradient(90deg, #25D366, #1EBEA5);
+}
+.contact-btn.call {
+  background: linear-gradient(90deg, var(--blue), #2c66ff);
+}
+
+
+
+/* small screens tweaks */
+@media (min-width: 760px){
+  .wrap{max-width:720px;padding:24px}
+  .products{grid-template-columns:repeat(2,1fr)}
+  .card img{width:110px;height:88px}
+}
