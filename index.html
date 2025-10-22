@@ -3,13 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>UNIVERSAL — Магазин Строительных Товаров</title>
+<title >UNIVERSAL — Магазин Строительных Товаров</title>
 <link rel="icon" href="logo.png" />
  <link rel="stylesheet" href="universal.css">
 </head>
 <body>
-
-<div class="wrap" role="main" aria-label="UNIVERSAL магазин строительных товаров">
 
   <header>
     <div class="logo" aria-hidden="true">
@@ -21,6 +19,17 @@
     </div>
   </header>
 
+  <nav class="navbar">
+  <ul>
+    <li>  <a href="catalog.html"> Каталог </a></li>
+    <li> <a href="cart.html" > Корзина </a> </li>
+    <li> <a href="contacts.html"> Контакты </a> </li>
+  </nav>
+  </ul>
+
+<div class="wrap" role="main" aria-label="UNIVERSAL магазин строительных товаров">
+
+
 
 
   <section class="hero" aria-labelledby="hero-title">
@@ -30,51 +39,6 @@
 
   <!--  -->
 
-    <div class="actions">
-      <div class="btn btn-cta" aria-label="Перейти в каталог">
-      🛒 Категории
-      </div>
-    </div>
-
-  <div class="cats"  arial-label="каталог">
-
-
-  <a href="электроинструмент.html" class="cat" title="Электроинструмент">
-    <span class="emoji">🔧</span>
-    <div class="name">Электроинструмент</div>
-  </a>
-
-  <a href="ручной инструмент.html" class="cat" title="Ручной инструмент">
-    <span class="emoji">🪚</span>
-    <div class="name">Ручной инструмент</div>
-  </a>
-
-  <a href="краски.html" class="cat" title="Краски и покрытия">
-    <span class="emoji">🎨</span>
-    <div class="name">Краски & покрытия</div>
-  </a>
-
-  <a href="крепеж.html" class="cat" title="Крепеж и метизы">
-    <span class="emoji">🔩</span>
-    <div class="name">Крепёж</div>
-  </a>
-
-  <a href="сантехника.html" class="cat" title="Сантехника">
-    <span class="emoji">🚿</span>
-    <div class="name">Сантехника</div>
-  </a>
-
-  <a href="электрика.html" class="cat" title="Электрика">
-    <span class="emoji">💡</span>
-    <div class="name">Электрика</div>
-  </a>
-
-  <a href="защита.html" class="cat" title="Средства защиты">
-    <span class="emoji">🧤</span>
-    <div class="name">Защита</div>
-  </a>
-
-</div>
 
 
   <!-- Каталог товаров -->
@@ -222,17 +186,81 @@
 
 </div>
 
-<!-- Фиксированные кнопки контактов внизу -->
-  <div class="contacts" aria-hidden="false">
+      <!-- Нижняя навигационная панель UNIVERSAL -->
+      <nav class="bottom-nav">
+      
+        <a href="catalog.html" class="nav-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/2516/2516745.png" alt="" class="nav-icon">
+          <span>Каталог</span>
+        </a>
+        <a href="cart.html" class="nav-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/1374/1374128.png" alt="" class="nav-icon">
+          <span>Корзина</span>
+        </a>
+        <a href="contacts.html" class="nav-item">
+          <img src="https://cdn-icons-png.flaticon.com/512/5103/5103372.png" alt="" class="nav-icon">
+          <span>Контакты</span>
+        </a>
+      </nav>
 
-    <a class="contact-btn whatsapp" href="https://wa.me/77001234567" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
-    💬 WhatsApp
-    </a>
+      <!-- === ФУТЕР UNIVERSAL === -->
+      <footer class="site-footer" role="contentinfo" aria-label="Подвал сайта">
+        <div class="wrap footer-top">
+          <div class="footer-col about-col">
+            <div class="logo-small" aria-hidden="true">
 
-    <a class="contact-btn call" href="tel:+77001234567" aria-label="Позвонить">
-    ☎ Звонок
-    </a>
-  </div>
+            </div>
+            <p>UNIVERSAL — магазин строительных материалов в Шымкенте. Качество, надёжность и быстрая доставка по городу.</p>
+          </div>
+
+          <!-- === Подвал сайта (Footer) === -->
+          <footer class="site-footer" aria-label="Подвал сайта UNIVERSAL">
+            <div class="wrap footer-grid">
+
+              <!-- Блок о компании -->
+              <div class="footer-about">
+                <div class="logo--small" aria-hidden="true">
+                  <img src="universal.jpg" alt="UNIVERSAL логотип">
+                </div>
+                <p><strong>UNIVERSAL</strong> — строительный магазин в Шымкенте. Качество материалов и сервис на первом месте.</p>
+              </div>
+
+              <!-- Быстрые ссылки -->
+              <nav class="footer-nav" aria-label="Быстрая навигация">
+                <h3>Навигация</h3>
+                <ul>
+                  <li><a href="index.html">Главная</a></li>
+                  <li><a href="catalog.html">Каталог</a></li>
+                  <li><a href="#about">О компании</a></li>
+                  <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+              </nav>
+
+              <!-- Контакты -->
+              <div class="footer-contacts" aria-label="Контактная информация">
+                <h3>Контакты</h3>
+                <p class="contact-line">📍 г. Шымкент, Казахстан</p>
+                <p class="contact-line">📞 <a href="tel:+77771234567">+7 (777) 123-45-67</a></p>
+                <p class="contact-line">✉ <a href="mailto:universal.shop@gmail.com">universal.shop@gmail.com</a></p>
+
+                <div class="social-row" aria-hidden="false">
+                  <a class="social-btn" href="https://wa.me/77001234567" aria-label="WhatsApp"><span>WhatsApp</span></a>
+                  <a class="social-btn" href="#" aria-label="Instagram"><span>Instagram</span></a>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Нижняя полоса -->
+            <div class="footer-bottom">
+              <div class="wrap footer-bottom-inner">
+                <p>© 2025 UNIVERSAL — г. Шымкент. Все права защищены.</p>
+                <p class="legal">БИН: 123456789012</p>
+              </div>
+            </div>
+          </footer>
+
+
 
 </body>
 </html>
