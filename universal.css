@@ -182,6 +182,113 @@
       margin-top: 4px;
       }
 
+      /* Корзина */
+
+      .product-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+      }
+
+      .add-to-cart {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 20px;
+        border-radius: 8px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .add-to-cart:hover {
+        transform: scale(1.1);
+        background-color: #0056b3;
+      }
+
+      .cart-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .cart-controls button {
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 18px;
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+
+      .cart-controls button:hover {
+        background: lime;
+      }
+
+      .cart-controls .quantity {
+        font-size: 18px;
+        font-weight: bold;
+        width: 25px;
+        text-align: center;
+      }
+
+
+      /* Иконка корзины  */
+      .cart-icon {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        cursor: pointer;
+        color: #333;
+        z-index: 1000;
+      }
+
+      .cart-icon span {
+        background: #ff4444;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 7px;
+        font-size: 14px;
+        position: absolute;
+        top: -8px;
+        right: -10px;
+      }
+
+      .cart-panel {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 320px;
+        height: 100%;
+        background: #fff;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+        transition: right 0.4s ease;
+        z-index: 999;
+        padding: 20px;
+        overflow-y: auto;
+      }
+
+      .cart-panel.active {
+        right: 0;
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 8px;
+      }
+
+
+
       /* Products grid */
       .products{
       display:grid;
@@ -199,7 +306,16 @@
       padding:12px;
       align-items:center;
       text-decoration: none;
+      transition:: translateY(100px);
+      transition: all 1s ease;
+      opacity: 0;
       }
+
+      .show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
       .card img{
       border: 0.1px solid gray;
       width:88px;
