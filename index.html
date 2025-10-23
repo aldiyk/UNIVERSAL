@@ -37,43 +37,46 @@
     <p>Быстрая доставка | Компетентные консультации | Гарантия на электроинструмент</p>
   </section>
 
-  <!--  -->
+  
 
 
 
   <!-- Каталог товаров -->
   <section id="catalog" aria-label="Популярные товары">
-    <h2 style="font-size:15px;color:var(--blue);margin:8px 0 10px;font-weight:700">Популярные товары</h2>
+    <h2 style="font-size:15px;color:var(--blue);margin:8px 0 10px;font-weight:700">
+      Популярные товары
+    </h2>
 
     <div class="products">
 
       <!-- Power Tools -->
       <article class="card" aria-labelledby="p1">
-
         <img src="https://www.expertcen.ru/uploads/article/rating/2016/04/510/900_42af6a23.jpg" alt="Аккумуляторный дрель-шуруповерт">
-
         <div class="info">
-
           <h3 id="p1">Аккумуляторный дрель-шуруповёрт</h3>
           <p>Мощный комплект с 2 аккумуляторами, удобная рукоять, быстрая зарядка.</p>
-
           <div class="price">от 28 000 ₸</div>
 
+          <div class="product-footer">
+             <button class="add-to-cart">
+               🛒
+             </button>
+
+          <div class="cart-controls">
+              <button class="plus">+</button>
+              <span class="quantity">0</span>
+              <button class="minus">-</button>
+          </div>
         </div>
+      </div>
       </article>
 
       <article class="card" aria-labelledby="p2">
-
         <img src="https://www.smsm.ru/upload/ammina.optimizer/png-webp/q80/articles/bolgarka.webp" alt="Угловая шлифмашина">
-
         <div class="info">
-
           <h3 id="p2">Угловая шлифмашина (болгарка)</h3>
           <p>Для резки и зачистки металла/плитки. Различные диаметры дисков.</p>
-
-          <div class="price">
-            от 19 500 ₸
-          </div>
+          <div class="price">  от 19 500 ₸ </div>
 
         </div>
       </article>
@@ -82,29 +85,21 @@
       <article class="card" aria-labelledby="p3">
         <img src="https://worx.ru/wp-content/uploads/2023/02/Drel-ili-perforator_Cover.jpg" alt="Перфоратор">
         <div class="info">
-
           <h3 id="p3">Перфоратор (ударная дрель)</h3>
           <p>Для бурения бетона и камня, режимы: сверление/удар/долбление.</p>
-
-          <div class="price">
-            от 45 000 ₸
-          </div>
+          <div class="price">от 45 000 ₸</div>
 
         </div>
       </article>
 
       <article class="card" aria-labelledby="p4">
-
         <img src="https://www.electro-master.ru/upload/medialibrary/2a0/ms8o68mlnl1vflcgph50rngqvkc1wkdd.png" alt="Набор ручных инструментов">
-
         <div class="info">
-
           <h3 id="p4">Набор ручных инструментов</h3>
           <p>Молотки, отвертки, ключи, плоскогубцы — базовый набор для мастера.</p>
+          <div class="price">от 9 900 ₸</div>
 
-          <div class="price">
-            от 9 900 ₸
-          </div>
+
 
         </div>
       </article>
@@ -188,7 +183,7 @@
 
       <!-- Нижняя навигационная панель UNIVERSAL -->
       <nav class="bottom-nav">
-      
+
         <a href="catalog.html" class="nav-item">
           <img src="https://cdn-icons-png.flaticon.com/512/2516/2516745.png" alt="" class="nav-icon">
           <span>Каталог</span>
@@ -203,6 +198,15 @@
         </a>
       </nav>
 
+      <div class="cart-icon" id="cartIcon">
+        🛒<span id="cartCount">0</span>
+      </div>
+
+      <div class="cart-panel" id="cartPanel">
+        <h2>Корзина</h2>
+        <div id="cartItems"></div>
+      </div>
+
       <!-- === ФУТЕР UNIVERSAL === -->
       <footer class="site-footer" role="contentinfo" aria-label="Подвал сайта">
         <div class="wrap footer-top">
@@ -212,6 +216,7 @@
             </div>
             <p>UNIVERSAL — магазин строительных материалов в Шымкенте. Качество, надёжность и быстрая доставка по городу.</p>
           </div>
+
 
           <!-- === Подвал сайта (Footer) === -->
           <footer class="site-footer" aria-label="Подвал сайта UNIVERSAL">
@@ -259,6 +264,9 @@
               </div>
             </div>
           </footer>
+
+          <script src="script.js" defer ></script>
+
 
 
 
