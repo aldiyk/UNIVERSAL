@@ -187,7 +187,7 @@
       .product-footer {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-top: 10px;
       }
 
@@ -286,6 +286,34 @@
         border-bottom: 1px solid #ddd;
         padding-bottom: 8px;
       }
+
+        /* Очистка корзины */
+        /* Стили для СКРЫТИЯ элемента */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Стили для кнопки "Очистить корзину" (ID: clearCartButton) */
+        #clearCartButton {
+            /* Добавляем отступ сверху, чтобы отделить от общей суммы */
+            margin-top: 15px;
+
+            /* Стилизация */
+            border: 1px solid #007bff; /* Немного другая рамка */
+            background-color: #007bff; /* Синий фон */
+            color: white;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 8px 12px;
+            width: 100%; /* Растянуть на всю ширину панели */
+            transition: background-color 0.2s; /* Для плавного эффекта */
+        }
+
+        /* Стили при наведении */
+        #clearCartButton:hover {
+            background-color: #0056b3; /* Чуть темнее при наведении */
+        }
 
 
 
