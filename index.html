@@ -1,350 +1,493 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta name="description" content="Universal — магазин инструментов для дома и профессионалов. Широкий выбор, доступные цены, надёжное качество и быстрая доставка.">
-<meta name="keywords" content="универсал, уни, уневерсал, уне">
-<meta name="author" content="Aldiyk and Rozik">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title >UNIVERSAL — Магазин Строительных Товаров</title>
-<link rel="icon" href="universal.jpg" />
- <link rel="stylesheet" href="universal.css">
+<title>Креативная капча</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f0f13;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+  }
+
+  .stars {
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite;
+    opacity: var(--o);
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: var(--o); }
+    50% { opacity: 0.1; }
+  }
+
+  .card {
+    position: relative;
+    z-index: 10;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 48px 40px;
+    width: 420px;
+    text-align: center;
+    box-shadow: 0 0 60px rgba(99,102,241,0.15), 0 20px 60px rgba(0,0,0,0.5);
+  }
+
+  .lock-icon {
+    width: 56px; height: 56px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    box-shadow: 0 8px 24px rgba(99,102,241,0.4);
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    color: rgba(255,255,255,0.45);
+    font-size: 13px;
+    margin-bottom: 32px;
+  }
+
+  /* === ARENA === */
+  .arena-wrap {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .arena {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: rgba(255,255,255,0.03);
+    border: 1.5px dashed rgba(255,255,255,0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: crosshair;
+  }
+
+  .arena::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(99,102,241,0.06) 0%, transparent 70%);
+  }
+
+  .hint-text {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255,255,255,0.2);
+    font-size: 13px;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .hint-text.hidden { opacity: 0; }
+
+  /* The escaping button */
+  .escape-btn {
+    position: absolute;
+    padding: 10px 22px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(99,102,241,0.5);
+    transition: box-shadow 0.2s;
+    user-select: none;
+    letter-spacing: 0.3px;
+  }
+
+  .escape-btn:hover {
+    box-shadow: 0 6px 28px rgba(168,85,247,0.7);
+  }
+
+  .escape-btn.caught {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    box-shadow: 0 6px 28px rgba(16,185,129,0.6) !important;
+    animation: wiggle 0.4s ease;
+  }
+
+  @keyframes wiggle {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.2); }
+    60% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    margin-bottom: 8px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1, #a855f7);
+    border-radius: 99px;
+    width: 0%;
+    transition: width 0.4s ease;
+    box-shadow: 0 0 8px rgba(99,102,241,0.6);
+  }
+
+  /* Status messages */
+  .status {
+    min-height: 22px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+    transition: all 0.3s;
+  }
+
+  .status.error { color: #f87171; }
+  .status.success { color: #34d399; font-weight: 600; }
+
+  /* Submit */
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(99,102,241,0.35);
+    letter-spacing: 0.3px;
+  }
+
+  .submit-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  .submit-btn:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(99,102,241,0.5);
+  }
+
+  .submit-btn:not(:disabled):active {
+    transform: translateY(0);
+  }
+
+  /* Reset link */
+  .reset-link {
+    display: inline-block;
+    margin-top: 16px;
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s;
+  }
+  .reset-link:hover { color: rgba(255,255,255,0.6); }
+
+  /* Success overlay */
+  .success-overlay {
+    position: absolute; inset: 0;
+    background: rgba(15,15,19,0.95);
+    border-radius: 24px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s;
+    z-index: 20;
+  }
+
+  .success-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .success-check {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 34px;
+    box-shadow: 0 8px 32px rgba(16,185,129,0.5);
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  @keyframes popIn {
+    from { transform: scale(0) rotate(-20deg); opacity: 0; }
+    to { transform: scale(1) rotate(0); opacity: 1; }
+  }
+
+  .success-overlay h2 { color: #fff; font-size: 20px; }
+  .success-overlay p { color: rgba(255,255,255,0.5); font-size: 13px; }
+
+  /* Particle burst */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    z-index: 100;
+    animation: burst 0.8s ease-out forwards;
+  }
+
+  @keyframes burst {
+    from { opacity: 1; transform: translate(0,0) scale(1); }
+    to   { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
+  }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="logo" aria-hidden="true">
-      <img src="universal.jpg" alt="UNIVERSAL logo" />
+<!-- Stars background -->
+<div class="stars" id="stars"></div>
+
+<!-- Main card -->
+<div class="card" id="card">
+  <div class="lock-icon">🔐</div>
+  <h1>Подтверди, что ты человек</h1>
+  <p class="subtitle">Поймай кнопку — роботы не успевают 😈</p>
+
+  <div class="arena-wrap">
+    <div class="arena" id="arena">
+      <div class="hint-text" id="hint">Наведи мышь<br>на кнопку</div>
+      <button class="escape-btn" id="escapeBtn">Поймай меня!</button>
     </div>
-    <div class="brand">
-      <div class="title">UNIVERSAL</div>
-      <div class="subtitle">Магазин строительных товаров</div>
+  </div>
+
+  <div class="progress-wrap">
+    <div class="progress-label">
+      <span>Прогресс</span>
+      <span id="catchCount">0 / 3</span>
     </div>
-  </header>
-
-  <nav class="navbar">
-  <ul>
-    <li>  <a href="catalog.html"> Каталог </a></li>
-    <li> <a href="cart.html" > Корзина </a> </li>
-    <li> <a href="contacts.html"> Контакты </a> </li>
-  </nav>
-  </ul>
-
-<div class="wrap" role="main" aria-label="UNIVERSAL магазин строительных товаров">
-
-
-
-
-  <section class="hero" aria-labelledby="hero-title">
-    <h1 id="hero-title">Современные инструменты. Надёжные решения.</h1>
-    <p>Быстрая доставка | Компетентные консультации | Гарантия на электроинструмент</p>
-  </section>
-
-
-
-
-
-  <!-- Каталог товаров -->
-  <section id="catalog" aria-label="Популярные товары">
-    <h2 style="font-size:15px;color:var(--blue);margin:8px 0 10px;font-weight:700">
-      Популярные товары
-    </h2>
-
-    <div class="products">
-
-      <!-- Power Tools -->
-      <article class="card" aria-labelledby="p1" data-id="1" data-price="28000">
-        <img src="https://www.expertcen.ru/uploads/article/rating/2016/04/510/900_42af6a23.jpg" alt="Аккумуляторный дрель-шуруповерт">
-        <div class="info">
-          <h3 id="p1">Аккумуляторный дрель-шуруповёрт</h3>
-          <p>Мощный комплект с 2 аккумуляторами, удобная рукоять, быстрая зарядка.</p>
-          <div class="price">от 28 000 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-        </div>
-
-      </article>
-
-      <article class="card" aria-labelledby="p2" data-id="2" data-price="19500">
-        <img src="https://www.smsm.ru/upload/ammina.optimizer/png-webp/q80/articles/bolgarka.webp" alt="Угловая шлифмашина">
-        <div class="info">
-          <h3 id="p2">Угловая шлифмашина (болгарка)</h3>
-          <p>Для резки и зачистки металла/плитки. Различные диаметры дисков.</p>
-          <div class="price">  от 19 500 ₸ </div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-
-      <article class="card" aria-labelledby="p3" data-id="3" data-price="45000">
-        <img src="https://worx.ru/wp-content/uploads/2023/02/Drel-ili-perforator_Cover.jpg" alt="Перфоратор">
-        <div class="info">
-          <h3 id="p3">Перфоратор (ударная дрель)</h3>
-          <p>Для бурения бетона и камня, режимы: сверление/удар/долбление.</p>
-          <div class="price">от 45 000 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p4" data-id="4" data-price="9900">
-        <img src="https://www.electro-master.ru/upload/medialibrary/2a0/ms8o68mlnl1vflcgph50rngqvkc1wkdd.png" alt="Набор ручных инструментов">
-        <div class="info">
-          <h3 id="p4">Набор ручных инструментов</h3>
-          <p>Молотки, отвертки, ключи, плоскогубцы — базовый набор для мастера.</p>
-          <div class="price">от 9 900 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p5" data-id="5" data-price="3200">
-        <img src="https://img.freepik.com/free-photo/top-view-paint-can_23-2149705336.jpg?semt=ais_hybrid&w=740&q=80" alt="Краска и валик">
-        <div class="info">
-          <h3 id="p5">Краски и лакокрасочные материалы</h3>
-          <p>Акриловые краски, грунтовки, лаки — для внутренних и наружных работ.</p>
-          <div class="price">от 3 200 ₸ / 10 л</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p6" data-id="6" data-price="450">
-        <img src="https://traiv-komplekt.ru/upload/adwex.minified/webp/9a8/50/9a89a0c418cf3f689ea7fae7d5ca4b6f.webp" alt="Крепеж и анкеры">
-        <div class="info">
-          <h3 id="p6">Комплекты крепежа (саморезы, анкеры)</h3>
-          <p>Ассортимент по размерам, боксы и наборы для монтажа.</p>
-          <div class="price">от 450 ₸ / набор</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p7" data-id="7" data-price="1200">
-        <img src="https://kwitka.ua/image/data/filemanager/1057_pistolety-dlya-peny-i-germet.jpg" alt="Пистолет для монтажной пены">
-        <div class="info">
-          <h3 id="p7">Пистолет для монтажной пены и герметики</h3>
-          <p>Силиконы, акриловые герметики, монтажная пена — для герметизации и изоляции.</p>
-          <div class="price">от 1 200 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p8" data-id="8" data-price="1100">
-        <img src="https://arselectro.ru/wp-content/uploads/2021/01/785900051_w640_h640_svetotehnika-i-elektroustanovka.jpg" alt="Электротовары и светильники">
-        <div class="info">
-          <h3 id="p8">Электро- и осветительная продукция</h3>
-          <p>Кабели, розетки, выключатели, LED-ленты, светильники и щиты.</p>
-          <div class="price">от 1 100 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p9" data-id="9" data-price="7500">
-        <img src="https://rusalia.ru/upload/iblock/642/642ffc0f12bab53f5a749d7fc6385a94.jpg" alt="Смесители и фиттинги">
-        <div class="info">
-          <h3 id="p9">Смесители, фиттинги и сантехника</h3>
-          <p>Смесители, душевые системы, гибкая подводка, фитинги и герметики.</p>
-          <div class="price">от 7 500 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p10" data-id="10" data-price="1000">
-        <img src="https://safeunion.az/wp-content/uploads/F%C9%99rdi-Muhafiz%C9%99-Vasit%C9%99l%C9%99ri-FMV-%D0%A1%D1%80%D0%B5%D0%B4%D1%81%D1%82%D0%B2%D0%B0-%D0%98%D0%BD%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D0%B9-%D0%97%D0%B0%D1%89%D0%B8%D1%82%D1%8B-%D0%A1%D0%98%D0%97.jpeg" alt="Средства защиты">
-        <div class="info">
-          <h3 id="p10">Средства индивидуальной защиты</h3>
-          <p>Каски, очки, респираторы, перчатки, страховочные пояса.</p>
-          <div class="price">от 1 000 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p11" data-id="11" data-price="8900">
-        <img src="https://www.minimaks.ru/upload/medialibrary/7c3/c3meopnqnfrqjjxng5j8m1y4vk3x82kc.jpg" alt="Измерительные инструменты">
-        <div class="info">
-          <h3 id="p11">Измерительные инструменты</h3>
-          <p>Лазерные уровни, рулетки, нивелиры, угломеры.</p>
-          <div class="price">от 8 900 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
-      <article class="card" aria-labelledby="p12" data-id="12" data-price="350">
-        <img src="https://novocraft.ru/upload/iblock/5fb/viez8uex1n0h4vqy0jyiyikn9jkzxhie/abrazivy.jpg" alt="Установка и расходные">
-        <div class="info">
-          <h3 id="p12">Расходные и вспомогательные материалы</h3>
-          <p>Диски, сверла, шлифовальные материалы, ленты и пр.</p>
-          <div class="price">от 350 ₸</div>
-
-          <div class="product-footer">
-             <button class="add-to-cart">
-               🛒
-             </button>
-          </div>
-
-        </div>
-      </article>
-
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
     </div>
-  </section>
+  </div>
 
+  <div class="status" id="status">Поймай кнопку 3 раза, чтобы продолжить</div>
+
+  <button class="submit-btn" id="submitBtn" disabled>Войти на сайт →</button>
+  <div class="reset-link" id="resetLink">Начать заново</div>
+
+  <!-- Success overlay -->
+  <div class="success-overlay" id="successOverlay">
+    <div class="success-check">✓</div>
+    <h2>Ты — человек!</h2>
+    <p>Проверка пройдена успешно</p>
+  </div>
 </div>
 
-      <!-- Нижняя навигационная панель UNIVERSAL -->
-      <nav class="bottom-nav">
+<script>
+  // ── Stars ──
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    s.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      --d:${2+Math.random()*4}s;
+      --o:${0.1+Math.random()*0.5};
+      animation-delay:${Math.random()*5}s;
+    `;
+    starsEl.appendChild(s);
+  }
 
-        <a href="catalog.html" class="nav-item">
-          <img src="https://cdn-icons-png.flaticon.com/512/2516/2516745.png" alt="" class="nav-icon">
-          <span>Каталог</span>
-        </a>
-        <a href="cart.html" class="nav-item">
-          <img src="https://cdn-icons-png.flaticon.com/512/1374/1374128.png" alt="" class="nav-icon">
-          <span>Корзина</span>
-        </a>
-        <a href="contacts.html" class="nav-item">
-          <img src="https://cdn-icons-png.flaticon.com/512/5103/5103372.png" alt="" class="nav-icon">
-          <span>Контакты</span>
-        </a>
-      </nav>
+  // ── State ──
+  const REQUIRED = 3;
+  let catches = 0;
+  let moving = false;
+  let escapeCooldown = false;
+  let caught = false;
 
-      <div class="cart-icon" id="cartIcon">
-        🛒<span id="cartCount">0</span>
-      </div>
+  const arena    = document.getElementById('arena');
+  const btn      = document.getElementById('escapeBtn');
+  const hint     = document.getElementById('hint');
+  const status   = document.getElementById('status');
+  const fill     = document.getElementById('progressFill');
+  const countEl  = document.getElementById('catchCount');
+  const submitBtn= document.getElementById('submitBtn');
+  const resetLink= document.getElementById('resetLink');
+  const overlay  = document.getElementById('successOverlay');
 
-      <div class="cart-panel" id="cartPanel">
-        <h2>Корзина</h2>
-        <div id="cartItems"></div>
-        <p id="cartTotal"> Общая сумма: 0 ₸</p>
+  // Place button randomly inside arena
+  function placeRandom(instant) {
+    const arenaW = arena.offsetWidth;
+    const arenaH = arena.offsetHeight;
+    const bw = btn.offsetWidth  || 130;
+    const bh = btn.offsetHeight || 40;
+    const margin = 12;
+    const x = margin + Math.random() * (arenaW - bw - margin*2);
+    const y = margin + Math.random() * (arenaH - bh - margin*2);
 
-        <button class="hidden" id="clearCartButton"> Очистить корзину</button>
+    if (instant) {
+      btn.style.transition = 'none';
+    } else {
+      btn.style.transition = 'left 0.18s cubic-bezier(0.25,0.46,0.45,0.94), top 0.18s cubic-bezier(0.25,0.46,0.45,0.94)';
+    }
+    btn.style.left = x + 'px';
+    btn.style.top  = y + 'px';
+  }
 
-      </div>
+  // Init
+  setTimeout(() => placeRandom(true), 50);
 
-      <!-- === ФУТЕР UNIVERSAL === -->
-      <footer class="site-footer" role="contentinfo" aria-label="Подвал сайта">
-        <div class="wrap footer-top">
-          <div class="footer-col about-col">
-            <div class="logo-small" aria-hidden="true">
+  // ── Escape on hover ──
+  btn.addEventListener('mouseenter', () => {
+    if (caught || escapeCooldown) return;
+    escapeCooldown = true;
 
-            </div>
-            <p>UNIVERSAL — магазин строительных материалов в Шымкенте. Качество, надёжность и быстрая доставка по городу.</p>
-          </div>
+    // Update hint
+    hint.classList.add('hidden');
 
+    // Escape!
+    placeRandom(false);
+    setStatus('Почти! Ещё раз 😄', '');
 
-          <!-- === Подвал сайта (Footer) === -->
-          <footer class="site-footer" aria-label="Подвал сайта UNIVERSAL">
-            <div class="wrap footer-grid">
+    setTimeout(() => { escapeCooldown = false; }, 220);
+  });
 
-              <!-- Блок о компании -->
-              <div class="footer-about">
-                <div class="logo--small" aria-hidden="true">
-                  <img src="universal.jpg" alt="UNIVERSAL логотип">
-                </div>
-                <p><strong>UNIVERSAL</strong> — строительный магазин в Шымкенте. Качество материалов и сервис на первом месте.</p>
-              </div>
+  // ── Catch on click ──
+  btn.addEventListener('click', () => {
+    if (caught) return;
+    caught = true;
+    catches++;
 
-              <!-- Быстрые ссылки -->
-              <nav class="footer-nav" aria-label="Быстрая навигация">
-                <h3>Навигация</h3>
-                <ul>
-                  <li><a href="index.html">Главная</a></li>
-                  <li><a href="catalog.html">Каталог</a></li>
-                  <li><a href="#about">О компании</a></li>
-                  <li><a href="contacts.html">Контакты</a></li>
-                </ul>
-              </nav>
+    btn.classList.add('caught');
+    btn.textContent = '✓ Поймал!';
 
-              <!-- Контакты -->
-              <div class="footer-contacts" aria-label="Контактная информация">
-                <h3>Контакты</h3>
-                <p class="contact-line">📍 г. Шымкент, Казахстан</p>
-                <p class="contact-line">📞 <a href="tel:+77771234567">+7 (777) 123-45-67</a></p>
-                <p class="contact-line">✉ <a href="mailto:universal.shop@gmail.com">universal.shop@gmail.com</a></p>
+    // Particles
+    spawnParticles();
 
-                <div class="social-row" aria-hidden="false">
-                  <a class="social-btn" href="https://wa.me/77001234567" aria-label="WhatsApp"><span>WhatsApp</span></a>
-                  <a class="social-btn" href="#" aria-label="Instagram"><span>Instagram</span></a>
-                </div>
-              </div>
+    // Update progress
+    const pct = (catches / REQUIRED) * 100;
+    fill.style.width = pct + '%';
+    countEl.textContent = `${catches} / ${REQUIRED}`;
 
-            </div>
+    if (catches >= REQUIRED) {
+      setStatus('Отлично! Ты точно человек 🎉', 'success');
+      submitBtn.disabled = false;
+      setTimeout(() => {
+        btn.style.opacity = '0.4';
+        btn.style.pointerEvents = 'none';
+      }, 400);
+    } else {
+      setStatus(`Поймал! Ещё ${REQUIRED - catches} раз 👍`, 'success');
+      setTimeout(() => {
+        caught = false;
+        btn.classList.remove('caught');
+        btn.textContent = 'Поймай меня!';
+        placeRandom(false);
+      }, 700);
+    }
+  });
 
-            <!-- Нижняя полоса -->
-            <div class="footer-bottom">
-              <div class="wrap footer-bottom-inner">
-                <p>© 2025 UNIVERSAL — г. Шымкент. Все права защищены.</p>
-                <p class="legal">БИН: 123456789012</p>
-              </div>
-            </div>
-          </footer>
+  // ── Submit ──
+    submitBtn.addEventListener('click', () => {
+    overlay.classList.add('show');
+    spawnParticles(true);
+    
+    // Перенаправляем на главную страницу через 1.5 сек
+    setTimeout(() => {
+      window.location.href = 'home.html'; 
+    }, 1500);
+  });
 
+  // ── Reset ──
+  resetLink.addEventListener('click', () => {
+    catches = 0; caught = false; escapeCooldown = false;
+    fill.style.width = '0%';
+    countEl.textContent = `0 / ${REQUIRED}`;
+    btn.classList.remove('caught');
+    btn.textContent = 'Поймай меня!';
+    btn.style.opacity = '';
+    btn.style.pointerEvents = '';
+    submitBtn.disabled = true;
+    hint.classList.remove('hidden');
+    overlay.classList.remove('show');
+    setStatus('Поймай кнопку 3 раза, чтобы продолжить', '');
+    setTimeout(() => placeRandom(true), 50);
+  });
 
+  function setStatus(msg, type) {
+    status.textContent = msg;
+    status.className = 'status' + (type ? ' ' + type : '');
+  }
 
+  // ── Particles ──
+  function spawnParticles(big) {
+    const colors = ['#6366f1','#a855f7','#ec4899','#10b981','#f59e0b','#3b82f6'];
+    const count = big ? 40 : 18;
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top  + rect.height/2;
 
-
-          <script src="script.js" defer ></script>
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const angle = (Math.random() * 360) * Math.PI / 180;
+      const dist  = 40 + Math.random() * (big ? 140 : 80);
+      p.style.cssText = `
+        left:${cx}px; top:${cy}px;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        --tx:${Math.cos(angle)*dist}px;
+        --ty:${Math.sin(angle)*dist}px;
+        animation-duration:${0.5+Math.random()*0.5}s;
+        animation-delay:${Math.random()*0.15}s;
+        width:${4+Math.random()*8}px;
+        height:${4+Math.random()*8}px;
+      `;
+      document.body.appendChild(p);
+      p.addEventListener('animationend', () => p.remove());
+    }
+  }
+</script>
 </body>
 </html>
-
